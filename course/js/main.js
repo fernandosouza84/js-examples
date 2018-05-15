@@ -38,7 +38,6 @@ function setList(list){
 
 function formatDesc(desc){
     if(desc != ''){
-        alert(desc);
         var str = desc.toLowerCase();
         str = str.charAt(0).toUpperCase() + str.slice(1);
         return str;

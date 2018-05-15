@@ -14,18 +14,23 @@
             </a>
         </nav>
 
+        <br/>
         <div class="container-fluid">
             <div class="form-inline">
               <div class="form-group">
                 <input type="text" class="form-control" id="desc" placeholder="Description">
-              </div>
+              </div>&nbsp;
               <div class="form-group">
                   <input type="text" class="form-control" id="amount" placeholder="Amount">
-              </div>
+              </div>&nbsp;
               <div class="form-group">
                   <input type="text" class="form-control" id="value" placeholder="Value">
-              </div>
-              <button onclick="addData();" class="btn btn-default">Add</button>
+              </div>&nbsp;
+              <span id="bntUpdate">
+                  <button onclick="updateData();" class="btn btn-default">Save</button>
+                  <button onclick="resetForm();" class="btn btn-default">Cancel</button>  
+              </span>&nbsp;
+              <button id="btnAdd" onclick="addData();" class="btn btn-default">Add</button>
             </div>
             <table id="listTable" class="table">
                 <!-- <thead>
@@ -49,6 +54,7 @@
               </table> -->
         </div>
 
+        <br/>
         <script src="js/config.js"></script>
         <script src="js/main.js"></script>
     </body>
