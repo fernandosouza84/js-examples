@@ -10,7 +10,7 @@ function getTotal(list){
     for (var key in list) {
         total += list[key].value * list[key].amount;
     }
-    return total;
+    document.getElementById('totalValue').innerHTML = formatValue(total);
 }
 
 function setList(list){
@@ -28,13 +28,14 @@ function setList(list){
   for(var key in list){
       table += '<tr><th scope="row">'+key+'</th><td>'+
       formatDesc(list[key].desc)+'</td><td>'+
-      list[key].amount+'</td><td>'+
+      formatAmount(list[key].amount)+'</td><td>'+
       formatValue(list[key].value)+
       '</td> <td><button class="btn btn-default" onclick="setUpdate('+key+')">Edit</button> | <button class="btn btn-default" onclick="deleteData('+key+')">Delete</button></td></tr>';
   }
 
   table +='</tbody>';
   document.getElementById("listTable").innerHTML = table;
+  getTotal(list);
 }
 
 function formatDesc(desc){
@@ -45,6 +46,10 @@ function formatDesc(desc){
     }
 }
 
+function formatAmount(amount){
+    return parseInt(amount);
+}
+
 function formatValue(value){
     var str = parseFloat(value).toFixed(2) + "";
     str = str.replace(".",",");
@@ -53,6 +58,9 @@ function formatValue(value){
 }
 
 function addData(){
+    if(!validation()){
+        return;
+    }
     var desc = document.getElementById('desc').value;
     var amount = document.getElementById('amount').value;
     var value = document.getElementById('value').value;
@@ -78,9 +86,13 @@ function resetForm(){
     document.getElementById('bntUpdate').style.display = "none";
     document.getElementById('btnAdd').style.display = "inline-block";
     document.getElementById('inputIDUpdate').innerHTML = "";
+    document.getElementById("errors").style.display = "none";
 }
 
 function updateData(){
+    if(!validation()){
+        return;
+    }
     var id = document.getElementById("idUpdate").value;
     var desc = document.getElementById('desc').value;
     var amount = document.getElementById('amount').value;
@@ -106,5 +118,47 @@ function deleteData(id){
     }
 }
 
+function validation(){
+    var desc = document.getElementById('desc').value;
+    var amount = document.getElementById('amount').value;
+    var value = document.getElementById('value').value;
+    var errors = "";
+    document.getElementById("errors").style.display = "none";
+
+    if(desc === ""){
+        errors += '<p>Fill out description</p>';
+    }
+
+    if(amount === ''){
+        errors += '<p>Fill out a quantity</p>';
+    } else if (amount != parseInt(amount)){
+        errors += '<p>Fill out a valid a mount</p>';
+    }
+
+    if(value === ''){
+        errors += '<p>Fill out a value</p>';
+    } else if (value != parseFloat(value)){
+        errors += '<p>Fill out a valid a value</p>';
+    }
+    if(errors != ''){
+        document.getElementById("errors").style.display = "block";
+        document.getElementById("errors").style.backgroundColor = "rgba(85, 85, 85, 0.3)";
+        document.getElementById("errors").style.color = "white";
+        document.getElementById("errors").style.padding = "10px";
+        document.getElementById("errors").style.margin = "10px";
+        document.getElementById("errors").style.borderRadius = "13px";
+        document.getElementById("errors").innerHTML = "<h3>Error:</h3>" + errors;
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+function deletList(){
+    if(confirm("Delete this list?")){
+        list = [];
+        setList(list);
+    }
+}
+
 setList(list);
-console.log(getTotal(list));

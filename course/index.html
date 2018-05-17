@@ -7,14 +7,13 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
     </head>
     <body>
-
         <nav class="navbar navbar-light bg-light">
             <a id="navTitle" class="navbar-brand" href="index.html">
               Shopping Control
             </a>
         </nav>
-
         <br/>
+
         <div class="container-fluid">
             <div class="form-inline">
               <div class="form-group">
@@ -31,31 +30,28 @@
                   <button onclick="updateData();" class="btn btn-default">Save</button>
                   <button onclick="resetForm();" class="btn btn-default">Cancel</button>  
               </span>&nbsp;
-              <button id="btnAdd" onclick="addData();" class="btn btn-default">Add</button>
+              <span id='btnAdd'>
+                  <button id="btnAdd" onclick="addData();" class="btn btn-default">Add</button>
+                  <button onclick="resetForm();" class="btn btn-default">Reset</button> 
+                  <button onclick="deletList();" class="btn btn-default">Delete List</button> 
+              </span>
+              
             </div>
+            <div id="errors" style="display: none;"></div>
             <table id="listTable" class="table">
-                <!-- <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Quantidade</th>
-                    <th scope="col">Valor</th>
-                    <th scope="col">Ação</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Rice</td>
-                    <td>2</td>
-                    <td>$ 5.90</td>
-                    <td>Edit | Delete</td>
-                  </tr>
-                </tbody>
-              </table> -->
         </div>
-
         <br/>
+
+        
+        <nav class="navbar navbar-light bg-light fixed-bottom">
+            <br/>
+          <span class="navbar-text">
+              <h4 class="text-center text-success"></h4>
+                Total:  <span id="totalValue">$ 0,00</span>
+              </h4>
+          </span>
+        </nav>
+
         <script src="js/config.js"></script>
         <script src="js/main.js"></script>
     </body>
